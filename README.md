@@ -116,6 +116,12 @@ Run the tests to ensure the core module works as expected:
 pytest
 ```
 
+Also run a Pylint score command so we make sure to follow some great guidelines
+
+```bash
+pylint score
+```
+
 ---
 
 ## Contribution

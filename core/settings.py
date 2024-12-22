@@ -1,5 +1,6 @@
 """Settings for the game."""
 
+# pylint: disable=too-few-public-methods
 class Settings:
     """A class to store all settings for the game."""
 
