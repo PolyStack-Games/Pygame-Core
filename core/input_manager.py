@@ -10,12 +10,6 @@ class InputManager:
 
     Attributes:
         keys (dict): A dictionary to store the state of all keys.
-
-    Methods:
-        update():
-            Updates the state of all keys.
-        is_pressed(key):
-            Returns True if the specified key is pressed, False otherwise.
     """
 
     def __init__(self):

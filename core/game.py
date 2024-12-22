@@ -5,10 +5,11 @@ Game module for handling the game loop and events.
 import sys
 import pygame
 # pylint: disable=no-name-in-module
-from pygame.constants import QUIT
-
-from core.scene import Scene
+from pygame.constants import QUIT, KEYDOWN, K_ESCAPE
 # pylint: enable=no-name-in-module
+
+from core.input_manager import InputManager
+from core.scene_manager import SceneManager
 
 class Game:
     """
@@ -19,12 +20,6 @@ class Game:
         clock (pygame.time.Clock): The game clock.
         fps (int): The target frames per second.
         running (bool): A flag to indicate if the game is running.
-
-    Methods:
-        run(scene):
-            Runs the game loop with the specified scene.
-        handle_events():
-            Handles pygame events such as quitting the game.
     """
 
     def __init__(self, screen, fps=60):
@@ -32,18 +27,20 @@ class Game:
         self.clock = pygame.time.Clock()
         self.fps = fps
         self.running = True
+        self.input_manager = InputManager()  # Initialize the InputManager
 
-    def run(self, scene: Scene):
+    def run(self, scene_manager: SceneManager):
         """
         Runs the game loop with the specified scene.
 
         Args:
             scene (Scene): The scene to run in the game loop.
         """
-        while self.running:
-            self.handle_events()
-            scene.update()
-            scene.render(self.screen)
+        while self.running and scene_manager.running:  # Check both flags
+            self.input_manager.update()  # Update input states
+            self.handle_global_events()  # Handle global events
+            scene_manager.update(self.input_manager)  # Update the current scene
+            scene_manager.render()  # Render the current scene
             pygame.display.flip()
             self.clock.tick(self.fps)
 
@@ -52,11 +49,10 @@ class Game:
         # pylint: enable=no-member
         sys.exit()
 
-    def handle_events(self):
+    def handle_global_events(self):
         """
-        Handles pygame events such as quitting the game
-        by setting the running flag to False.
+        Handles global events such as quitting the game.
         """
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
                 self.running = False

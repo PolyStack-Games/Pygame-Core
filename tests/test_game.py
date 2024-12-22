@@ -26,6 +26,6 @@ def test_game_quits():
     # pylint: disable=no-member
     pygame.event.post(pygame.event.Event(pygame.QUIT))
     # pylint: enable=no-member
-    game.handle_events()
+    game.handle_global_events()
 
     assert not game.running
