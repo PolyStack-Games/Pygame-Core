@@ -13,13 +13,13 @@ class InputManager:
     """
 
     def __init__(self):
-        self.keys = {}
+        self.keys: dict = {}
 
     def update(self):
         """Updates the state of all keys."""
         self.keys = pygame.key.get_pressed()
 
-    def is_pressed(self, key):
+    def is_pressed(self, key: int):
         """
         Returns True if the specified key is pressed, False otherwise.
 

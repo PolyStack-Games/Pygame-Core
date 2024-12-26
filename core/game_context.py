@@ -6,7 +6,7 @@ from core.settings import Settings
 class GameContext:
     """A centralized container for shared game resources."""
 
-    def __init__(self, settings=None):
+    def __init__(self, settings:Settings=None):
         self.asset_manager = AssetManager()
         self.settings = settings or Settings()  # Use provided settings or default
 
@@ -19,31 +19,30 @@ class GameContext:
             keys and a list of asset definitions as values.
 
         Example:
-            {
+            assets = {
                 "images": [
-                    ("player", "assets/player.png"),
-                    ("enemy", "assets/enemy.png")
+                    {"name": "player", "path": "assets/images/player.png"},
+                    {"name": "enemy", "path": "assets/images/enemy.png"}
                 ],
                 "sounds": [
-                    ("explosion", "assets/explosion.wav"),
-                    ("pickup", "assets/pickup.wav")
+                    {"name": "jump", "path": "assets/sounds/jump.wav"},
+                    {"name": "explosion", "path": "assets/sounds/explosion.wav"}
                 ],
                 "fonts": [
-                    ("main_font", "assets/font.ttf", 24),
-                    ("title_font", "assets/title_font.ttf", 36)
+                    {"name": "default", "path": "assets/fonts/arial.ttf", "size": 24}
                 ]
             }
         """
         for asset_type, assets in asset_config.items():
-            for name, path in assets:
+            for asset in assets:
                 if asset_type == "images":
-                    self.asset_manager.load_image(name, path)
+                    self.asset_manager.load_image(**asset)  # Unpack {"name": ..., "path": ...}
                 elif asset_type == "sounds":
-                    self.asset_manager.load_sound(name, path)
+                    self.asset_manager.load_sound(**asset)  # Unpack {"name": ..., "path": ...}
                 elif asset_type == "fonts":
-                    self.asset_manager.load_font(name, path[0], path[1])
+                    self.asset_manager.load_font(asset["name"], asset["path"], asset["size"])
 
-    def update_settings(self, new_config):
+    def update_settings(self, new_config:dict):
         """
         Update settings dynamically with a dictionary.
 
@@ -55,7 +54,7 @@ class GameContext:
         """
         self.settings = Settings.from_dict({**self.settings.to_dict(), **new_config})
 
-def create_game_context(asset_config=None, custom_settings=None):
+def create_game_context(asset_config:dict=None, custom_settings:Settings=None):
     """
     Creates and initializes a GameContext instance.
 

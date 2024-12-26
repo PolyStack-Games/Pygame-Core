@@ -2,6 +2,7 @@
 This module contains the SceneManager class.
 """
 
+from core.input_manager import InputManager
 from core.scene import Scene
 
 class SceneManager:
@@ -23,7 +24,7 @@ class SceneManager:
         self.current_scene = initial_scene
         self.running = True
 
-    def update(self, input_manager):
+    def update(self, input_manager: InputManager):
         """
         Updates the current scene with input states.
 

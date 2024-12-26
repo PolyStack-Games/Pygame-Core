@@ -2,10 +2,10 @@
 This module contains utility functions that are used in the game.
 """
 
+from pygame import Rect
 from core.dataclasses import Size
 
-
-def check_collision(rect1, rect2):
+def check_collision(rect1: Rect, rect2: Rect):
     """
     Check if two rectangles are colliding.
 
@@ -18,7 +18,7 @@ def check_collision(rect1, rect2):
     """
     return rect1.colliderect(rect2)
 
-def wrap_around_screen(rect, size: Size):
+def wrap_around_screen(rect: Rect, size: Size):
     """
     Wrap an entity around the screen if it goes off the edge.
 

@@ -5,6 +5,7 @@ Game module for handling the game loop and events.
 import sys
 import pygame
 # pylint: disable=no-name-in-module
+from pygame import time, display, event
 from pygame.constants import QUIT, KEYDOWN, K_ESCAPE
 # pylint: enable=no-name-in-module
 
@@ -24,7 +25,7 @@ class Game:
 
     def __init__(self, screen, fps=60):
         self.screen = screen
-        self.clock = pygame.time.Clock()
+        self.clock = time.Clock()
         self.fps = fps
         self.running = True
         self.input_manager = InputManager()  # Initialize the InputManager
@@ -41,7 +42,7 @@ class Game:
             self.handle_global_events()  # Handle global events
             scene_manager.update(self.input_manager)  # Update the current scene
             scene_manager.render()  # Render the current scene
-            pygame.display.flip()
+            display.flip()
             self.clock.tick(self.fps)
 
         # pylint: disable=no-member
@@ -53,6 +54,6 @@ class Game:
         """
         Handles global events such as quitting the game.
         """
-        for event in pygame.event.get():
-            if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+        for e in event.get():
+            if e.type == QUIT or (e.type == KEYDOWN and e.key == K_ESCAPE):
                 self.running = False
