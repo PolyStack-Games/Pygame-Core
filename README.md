@@ -75,10 +75,27 @@ Contributions are welcome! To contribute:
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
 3. Make your changes.
-4. Submit a pull request.
+4. Run a pylint `pylint core`
+5. Submit a pull request.
 
 Please ensure all tests pass before submitting your PR.
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Upload
+
+> Remember to update version number in `VERSION` file and delete the dist folder before uploading.
+
+Build:
+
+```bash
+python -m build
+```
+
+Upload:
+
+```bash
+python -m twine upload dist/*
+```
