@@ -9,6 +9,7 @@ class GameContext:
     def __init__(self, settings:Settings=None):
         self.asset_manager = AssetManager()
         self.settings = settings or Settings()  # Use provided settings or default
+        self.scene_manager = None
 
     def load_assets(self, asset_config: dict):
         """
@@ -54,7 +55,10 @@ class GameContext:
         """
         self.settings = Settings.from_dict({**self.settings.to_dict(), **new_config})
 
-def create_game_context(asset_config:dict=None, custom_settings:Settings=None):
+def create_game_context(
+        asset_config:dict=None,
+        custom_settings:Settings=None
+    ) -> GameContext:
     """
     Creates and initializes a GameContext instance.
 
@@ -65,6 +69,10 @@ def create_game_context(asset_config:dict=None, custom_settings:Settings=None):
         GameContext: The initialized GameContext instance.
     """
     context = GameContext(settings=custom_settings)
+    # pylint: disable=import-outside-toplevel
+    from core.scene_manager import SceneManager
+    # pylint: enable=import-outside-toplevel
+    context.scene_manager = SceneManager()
     if asset_config:
         context.load_assets(asset_config)
     return context

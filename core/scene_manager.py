@@ -7,40 +7,38 @@ from core.scene import Scene
 
 class SceneManager:
     """
-    The SceneManager class is responsible for managing the scenes in the game.
+    Manages the scenes in the game and handles transitions.
 
     Attributes:
-        current_scene (Scene): The current scene that is being run.
-
-    Methods:
-        __init__(initial_scene):
-            Initializes the SceneManager with the specified initial scene.
-        update(input_manager):
-            Updates the current scene with input states.
-        render():
-            Renders the current scene.
+        current_scene (Scene): The active scene.
+        running (bool): Flag to indicate if the game is running.
     """
-    def __init__(self, initial_scene: Scene):
-        self.current_scene = initial_scene
+
+    def __init__(self):
+        self.current_scene = None
         self.running = True
+
+    def set_initial_scene(self, scene: Scene):
+        """Set the initial scene for the game."""
+        self.current_scene = scene
 
     def update(self, input_manager: InputManager):
         """
-        Updates the current scene with input states.
+        Updates the current scene and checks for transitions.
 
         Args:
             input_manager (InputManager): The input manager to query input states.
         """
         if self.current_scene:
-            next_scene = self.current_scene.update(input_manager)
-            if not self.current_scene.running:  # If the current scene stops, stop the SceneManager
+            self.current_scene.update(input_manager)
+            if not self.current_scene.running:  # Check if the current scene should stop
                 self.running = False
-            elif next_scene:  # Transition to the next scene
-                self.current_scene = next_scene
 
     def render(self):
-        """
-        Renders the current scene.
-        """
+        """Renders the current scene."""
         if self.current_scene:
             self.current_scene.render()
+
+    def transition_to(self, new_scene: Scene):
+        """Transition to a new scene."""
+        self.current_scene = new_scene
