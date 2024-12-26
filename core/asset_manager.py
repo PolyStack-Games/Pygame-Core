@@ -6,50 +6,30 @@ for loading and caching game assets such as images and sounds.
 import pygame
 
 class AssetManager:
-    """
-    AssetManager is a utility class for loading and caching game assets such as images and sounds.
+    """Manages game assets like images, sounds, and fonts."""
 
-    Attributes:
-        _cache (dict): A dictionary to store cached assets to avoid reloading them multiple times.
+    def __init__(self):
+        self.assets = {}
 
-    Methods:
-        load_image(path):
-            Loads an image from the specified path and caches it.
-            If the image is already cached, returns the cached image.
-        load_sound(path):
-            Loads a sound from the specified path and caches it.
-            If the sound is already cached, returns the cached sound.
-    """
-    _cache = {}
+    def load_image(self, name, path):
+        """Load an image asset from a file."""
+        if name not in self.assets:
+            self.assets[name] = pygame.image.load(path).convert_alpha()
+        return self.assets[name]
 
-    @staticmethod
-    def load_image(path):
-        """
-        Loads an image from the specified path and caches it.
-        If the image is already cached, returns the cached image.
+    def load_sound(self, name, path):
+        """Load a sound asset from a file."""
+        if name not in self.assets:
+            self.assets[name] = pygame.mixer.Sound(path)
+        return self.assets[name]
 
-        Args:
-            path (str): The file path to the image.
+    def load_font(self, name, path, size):
+        """Load a font asset from a file."""
+        key = f"{name}_{size}"
+        if key not in self.assets:
+            self.assets[key] = pygame.font.Font(path, size)
+        return self.assets[key]
 
-        Returns:
-            pygame.Surface: The loaded image.
-        """
-        if path not in AssetManager._cache:
-            AssetManager._cache[path] = pygame.image.load(path).convert_alpha()
-        return AssetManager._cache[path]
-
-    @staticmethod
-    def load_sound(path):
-        """
-        Loads a sound from the specified path and caches it.
-        If the sound is already cached, returns the cached sound.
-
-        Args:
-            path (str): The file path to the sound.
-
-        Returns:
-            pygame.mixer.Sound: The loaded sound.
-        """
-        if path not in AssetManager._cache:
-            AssetManager._cache[path] = pygame.mixer.Sound(path)
-        return AssetManager._cache[path]
+    def get(self, name):
+        """Get an asset by name."""
+        return self.assets.get(name)
