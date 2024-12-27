@@ -63,8 +63,8 @@ class Cords:
 @dataclass
 class Size:
     """A simple dataclass to store width and height."""
-    width: int
-    height: int
+    width: float
+    height: float
 
     def __add__(self, other):
         if isinstance(other, Size):

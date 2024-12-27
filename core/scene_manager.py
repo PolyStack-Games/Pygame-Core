@@ -17,6 +17,7 @@ class SceneManager:
     def __init__(self):
         self.current_scene = None
         self.running = True
+        self.cache = {}
 
     def set_initial_scene(self, scene: Scene):
         """Set the initial scene for the game."""
@@ -42,3 +43,15 @@ class SceneManager:
     def transition_to(self, new_scene: Scene):
         """Transition to a new scene."""
         self.current_scene = new_scene
+
+    def cache_scene(self, scene_name: str, scene: Scene):
+        """Cache a scene for later use."""
+        self.cache[scene_name] = scene
+
+    def get_cached_scene(self, scene_name: str) -> Scene:
+        """Get a cached scene."""
+        return self.cache.get(scene_name)
+
+    def is_scene_cached(self, scene_name: str) -> bool:
+        """Check if a scene is cached."""
+        return scene_name in self.cache

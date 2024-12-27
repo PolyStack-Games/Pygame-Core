@@ -38,8 +38,8 @@ class Game:
             scene (Scene): The scene to run in the game loop.
         """
         while self.running and scene_manager.running:  # Check both flags
-            self.input_manager.update()  # Update input states
             self.handle_global_events()  # Handle global events
+            self.input_manager.update()  # Update input states
             scene_manager.update(self.input_manager)  # Update the current scene
             scene_manager.render()  # Render the current scene
             display.flip()
@@ -54,6 +54,8 @@ class Game:
         """
         Handles global events such as quitting the game.
         """
-        for e in event.get():
-            if e.type == QUIT or (e.type == KEYDOWN and e.key == K_ESCAPE):
-                self.running = False
+        if self.input_manager.is_pressed(K_ESCAPE):
+            self.running = False
+        # for e in event.get():
+        #     if e.type == QUIT or (e.type == KEYDOWN and e.key == K_ESCAPE):
+        #         self.running = False
