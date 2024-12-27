@@ -57,7 +57,7 @@ class GameContext:
 
 def create_game_context(
         asset_config:dict=None,
-        custom_settings:Settings=None
+        custom_settings:Settings=None,
     ) -> GameContext:
     """
     Creates and initializes a GameContext instance.
