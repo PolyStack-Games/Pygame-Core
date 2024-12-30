@@ -1,5 +1,6 @@
 """Core module for the game engine. Contains the main classes and utilities."""
 
+from .animated_sprite import AnimatedSprite
 from .game import Game
 from .scene import Scene
 from .scene_manager import SceneManager
@@ -13,6 +14,7 @@ from . import wrappers
 from . import utils
 
 __all__ = [
+    "AnimatedSprite",
     'Game',
     'Scene',
     'SceneManager',
