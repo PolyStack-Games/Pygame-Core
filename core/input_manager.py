@@ -2,11 +2,11 @@
 This module contains the InputManager class, which is responsible for handling input from the user.
 """
 
-from typing import Tuple
-
 import pygame
+# pylint: disable=no-name-in-module
 from pygame import KEYUP, KEYDOWN, MOUSEBUTTONUP, MOUSEBUTTONDOWN
 from pygame.key import ScancodeWrapper
+# pylint: enable=no-name-in-module
 
 class InputManager:
     """
@@ -22,7 +22,7 @@ class InputManager:
         self.keys: ScancodeWrapper = pygame.key.get_pressed()
         self.keys_pressed: ScancodeWrapper = pygame.key.get_pressed()
         self.keys_released: list = []
-        self.mouse_pos: Tuple[int, int] = pygame.mouse.get_pos()
+        self.mouse_pos: tuple[int, int] = pygame.mouse.get_pos()
         self.mouse_clicked_down: dict = {0: False, 1: False, 2: False}
         self.mouse_clicked_up: dict = {0: False, 1: False, 2: False}
         self.mouse_button: int = 0

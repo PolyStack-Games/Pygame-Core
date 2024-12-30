@@ -3,10 +3,11 @@ Game module for handling the game loop and events.
 """
 
 import sys
+
 import pygame
 # pylint: disable=no-name-in-module
-from pygame import time, display, event
-from pygame.constants import QUIT, KEYDOWN, K_ESCAPE
+from pygame import time, display
+from pygame.constants import K_ESCAPE
 # pylint: enable=no-name-in-module
 
 from core.input_manager import InputManager
