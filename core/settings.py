@@ -1,5 +1,4 @@
 """Settings for the game."""
-
 from dataclasses import dataclass, field, asdict
 import json
 

@@ -15,7 +15,7 @@ class SceneManager:
     """
 
     def __init__(self):
-        self.current_scene = None
+        self.current_scene: Scene | None = None
         self.running = True
         self.cache = {}
 

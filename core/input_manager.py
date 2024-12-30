@@ -3,10 +3,10 @@ This module contains the InputManager class, which is responsible for handling i
 """
 
 from typing import Tuple
+
 import pygame
-# pylint: disable=no-name-in-module
-from pygame.constants import KEYUP, MOUSEBUTTONUP, MOUSEBUTTONDOWN
-# pylint: enable=no-name-in-module
+from pygame import KEYUP, KEYDOWN, MOUSEBUTTONUP, MOUSEBUTTONDOWN
+from pygame.key import ScancodeWrapper
 
 class InputManager:
     """
@@ -16,22 +16,23 @@ class InputManager:
         keys_pressed (list): Current frame's key press states.
         keys_released (list): Keys that were released in the current frame.
         mouse_pos (tuple): The current mouse position.
-        mouse_buttons (list): Current frame's mouse button states.
     """
 
     def __init__(self):
-        self.keys_pressed: list = pygame.key.get_pressed()
+        self.keys: ScancodeWrapper = pygame.key.get_pressed()
+        self.keys_pressed: ScancodeWrapper = pygame.key.get_pressed()
         self.keys_released: list = []
         self.mouse_pos: Tuple[int, int] = pygame.mouse.get_pos()
         self.mouse_clicked_down: dict = {0: False, 1: False, 2: False}
         self.mouse_clicked_up: dict = {0: False, 1: False, 2: False}
         self.mouse_button: int = 0
+        self.unicode: str = ""
 
     def update(self):
         """
         Updates the input state. Should be called once per frame.
         """
-        self.keys_pressed = pygame.key.get_pressed()
+        self.keys_pressed = self.keys
         self.keys_released = []
         self.mouse_clicked_up = {0: False, 1: False, 2: False}
         self.mouse_clicked_down = {0: False, 1: False, 2: False}
@@ -39,10 +40,17 @@ class InputManager:
         # Capture mouse state
         self.mouse_pos = pygame.mouse.get_pos()
 
+        self.unicode = ''
+
         # Capture key release events
         for event in pygame.event.get():
             if event.type == KEYUP:
                 self.keys_released.append(event.key)
+
+            if event.type == KEYDOWN:
+                self.keys_pressed = pygame.key.get_pressed()
+                self.unicode = event.unicode
+
             if event.type == MOUSEBUTTONUP:
                 self.mouse_clicked_up[self.mouse_button] = True
             if event.type == MOUSEBUTTONDOWN:

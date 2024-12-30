@@ -24,14 +24,13 @@ def wrap_around_screen(rect: Rect, size: Size):
 
     Args:
         rect (pygame.Rect): The entity to wrap around the screen.
-        screen_width (int): The width of the screen.
-        screen_height (int): The height of the screen.
+        size (Size): The width of the screen.
     """
     if rect.left > size.width:
         rect.right = 0
     elif rect.right < 0:
-        rect.left = size.width
+        rect.left = int(size.width)
     if rect.top > size.height:
         rect.bottom = 0
     elif rect.bottom < 0:
-        rect.top = size.height
+        rect.top = int(size.height)

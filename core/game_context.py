@@ -64,6 +64,7 @@ def create_game_context(
 
     Args:
         asset_config (dict, optional): A dictionary specifying assets to preload. Defaults to None.
+        custom_settings (Settings, optional): Custom game settings. Defaults to None.
 
     Returns:
         GameContext: The initialized GameContext instance.

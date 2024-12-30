@@ -35,7 +35,7 @@ class Game:
         Runs the game loop with the specified scene.
 
         Args:
-            scene (Scene): The scene to run in the game loop.
+            scene_manager (SceneManager): The scene manager to handle the game scenes.
         """
         while self.running and scene_manager.running:  # Check both flags
             self.handle_global_events()  # Handle global events
