@@ -9,8 +9,6 @@ from .entity import Entity
 from .asset_manager import AssetManager
 from .settings import Settings
 from .game_context import create_game_context, GameContext
-from . import dataclasses
-from . import wrappers
 from . import utils
 
 __all__ = [
@@ -24,7 +22,5 @@ __all__ = [
     'Settings',
     'GameContext',
     'create_game_context',
-    'dataclasses',
-    'wrappers',
     'utils',
 ]

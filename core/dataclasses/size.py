@@ -1,10 +1,7 @@
-"""Dataclasses for the core module."""
-
+"""Wrappers for functions that enforce certain types of arguments."""
 from dataclasses import dataclass
-
-from pygame import Surface, Rect
-
-from core.wrappers import enforce_size
+from functools import wraps
+from inspect import signature
 
 @dataclass
 class Size:
@@ -63,44 +60,26 @@ class Size:
             return value
         raise TypeError(f"Cannot convert {type(value)} to Size")
 
-@dataclass
-class SpriteSheet:
-    """A class to store the sprite animation data."""
-    sprite_sheet: Surface
-    num_frames: int
-    frame_duration: int
-    current_frame: int = 0
-    last_update: int = 0
+def enforce_size(*arg_names):
+    """
+    Decorator to enforce that specific arguments are converted to Size objects.
 
-    def __init__(self, sprite_sheet: Surface, num_frames: int, frame_duration: int):
-        self.sprite_sheet = sprite_sheet
-        self.num_frames = num_frames
-        self.frame_duration = frame_duration
-        self.frames = []
-        _width = self.sprite_sheet.get_width() // self.num_frames
-        _height = self.sprite_sheet.get_height()
-        self.load_frames(Size(_width, _height))
+    Parameters:
+        arg_names (str): The names of the arguments to be converted.
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            # Get function argument names
+            sig = signature(func)
+            bound_args = sig.bind(*args, **kwargs)
+            bound_args.apply_defaults()
 
-    @enforce_size("size")
-    def load_frames(self, size: Size):
-        """
-        Load the frames of the sprite sheet.
+            # Convert specified arguments
+            for arg_name in arg_names:
+                if arg_name in bound_args.arguments:
+                    bound_args.arguments[arg_name] = Size.from_any(bound_args.arguments[arg_name])
 
-        Args:
-            size (Size): The size of the frames.
-        """
-        for i in range(self.num_frames):
-            rect = Rect(i * size.width, 0, size.width, size.height)
-            frame = self.sprite_sheet.subsurface(rect)
-            self.frames.append(frame)
-
-    def animate(self, now: int):
-        """
-        Animate the sprite.
-
-        Args:
-            now (int): The current time in milliseconds.
-        """
-        if now - self.last_update > self.frame_duration:
-            self.current_frame = (self.current_frame + 1) % self.num_frames
-            self.last_update = now
+            return func(*bound_args.args, **bound_args.kwargs)
+        return wrapper
+    return decorator

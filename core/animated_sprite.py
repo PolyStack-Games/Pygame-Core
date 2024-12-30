@@ -3,12 +3,8 @@ Module for handling animated sprites
 """
 
 import pygame
-from core.dataclasses import Size
-from core.wrappers import enforce_size
+from core.dataclasses import Size, enforce_size, SpriteSheet
 from pygame import Surface, Vector2
-
-from utils import SpriteSheet
-
 
 class AnimatedSprite:
     """
