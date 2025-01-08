@@ -3,8 +3,8 @@ Module for handling animated sprites
 """
 
 import pygame
-from core.dataclasses import Size, enforce_size, SpriteSheet
 from pygame import Surface, Vector2
+from core.dataclasses import Size, enforce_size, SpriteSheet
 
 class AnimatedSprite:
     """
@@ -30,5 +30,6 @@ class AnimatedSprite:
         Method for drawing the sprite
         """
         _size = (self.size.width * self.upscale, self.size.height * self.upscale)
-        source = pygame.transform.scale(self.sprite_sheet.frames[self.sprite_sheet.current_frame], _size)
+        _sprite = self.sprite_sheet.frames[self.sprite_sheet.current_frame]
+        source = pygame.transform.scale(_sprite, _size)
         screen.blit(source, vector2)
