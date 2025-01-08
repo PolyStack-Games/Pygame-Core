@@ -27,7 +27,7 @@ jobs:
 
       - name: Build the package with release version
         run: |
-          export RELEASE_VERSION=release_version="${{ github.event.release.tag_name }}"
+          export RELEASE_VERSION="${{ github.event.release.tag_name }}"
           python setup.py sdist bdist_wheel
 
       - name: Publish to PyPI
