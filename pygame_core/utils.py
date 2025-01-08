@@ -3,7 +3,7 @@ This module contains utility functions that are used in the game.
 """
 
 from pygame import Rect
-from core.dataclasses import Size
+from pygame_core.dataclasses import Size
 
 def check_collision(rect1: Rect, rect2: Rect):
     """

@@ -16,12 +16,12 @@ INSTALL_REQUIRE = ['pygame>=2.5.2']
 TESTS_REQUIRE = ['pylint', 'pytest', 'pytest-pylint']
 
 setup(
-    name='pygame-core',
+    name='pygame-pygame_core',
 
     # Versions should comply with PEP440
     version=version,
 
-    description='A modular core library for Pygame-based 2D games.',
+    description='A modular pygame_core library for Pygame-based 2D games.',
     long_description=long_description,
     long_description_content_type='text/markdown',
 
@@ -42,7 +42,7 @@ setup(
 
     keywords='pygame game development engine',
 
-    packages=find_packages(include=["core", "core.*"]),
+    packages=find_packages(include=["pygame_core", "pygame_core.*"]),
 
     install_requires=INSTALL_REQUIRE,
 

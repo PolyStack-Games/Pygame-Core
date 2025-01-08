@@ -1,7 +1,7 @@
 """A centralized container for shared game resources."""
 
-from core.asset_manager import AssetManager
-from core.settings import Settings
+from pygame_core.asset_manager import AssetManager
+from pygame_core.settings import Settings
 
 class GameContext:
     """A centralized container for shared game resources."""
@@ -71,7 +71,7 @@ def create_game_context(
     """
     context = GameContext(settings=custom_settings)
     # pylint: disable=import-outside-toplevel
-    from core.scene_manager import SceneManager
+    from pygame_core.scene_manager import SceneManager
     # pylint: enable=import-outside-toplevel
     context.scene_manager = SceneManager()
     if asset_config:

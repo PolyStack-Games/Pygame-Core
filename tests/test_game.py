@@ -4,8 +4,8 @@ Tests for the Game class.
 
 import pygame
 
-from core import create_game_context
-from core.game import Game
+from pygame_core import create_game_context
+from pygame_core.game import Game
 from tests.test_scene import MockScene
 
 

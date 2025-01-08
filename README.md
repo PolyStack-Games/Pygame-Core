@@ -17,7 +17,7 @@
 Install the package using `pip`:
 
 ```bash
-pip install pygame-core
+pip install pygame-pygame_core
 ```
 
 ## Usage
@@ -28,7 +28,8 @@ Below is an example of how to use **Pygame Core** to create a simple game:
 
 ```python
 import pygame
-from core import Game, Scene, SceneManager
+from pygame_core import Game, Scene, SceneManager
+
 
 class MainMenu(Scene):
     def update(self, input_manager):
@@ -41,6 +42,7 @@ class MainMenu(Scene):
         text = font.render("Press Enter to Start", True, (255, 255, 255))
         self.screen.blit(text, (150, 300))
 
+
 class Gameplay(Scene):
     def update(self, input_manager):
         # Game logic goes here
@@ -48,6 +50,7 @@ class Gameplay(Scene):
 
     def render(self):
         self.screen.fill((30, 30, 30))
+
 
 if __name__ == "__main__":
     pygame.init()

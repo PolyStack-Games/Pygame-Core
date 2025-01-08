@@ -1,9 +1,9 @@
-"""Dataclasses for the core module."""
+"""Dataclasses for the pygame_core module."""
 
 from dataclasses import dataclass
 from pygame import Surface, Rect
 
-from core.dataclasses.size import Size, enforce_size
+from pygame_core.dataclasses.size import Size, enforce_size
 
 @dataclass
 class SpriteSheet:

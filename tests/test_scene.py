@@ -4,8 +4,8 @@ Tests for the Scene class and its subclasses.
 
 import pygame
 
-from core import create_game_context
-from core.scene import Scene
+from pygame_core import create_game_context
+from pygame_core.scene import Scene
 
 class MockScene(Scene):
     """

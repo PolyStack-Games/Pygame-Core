@@ -10,8 +10,8 @@ from pygame import time, display
 from pygame.constants import K_ESCAPE
 # pylint: enable=no-name-in-module
 # pylint: disable=cyclic-import
-from core.input_manager import InputManager
-from core.scene_manager import SceneManager
+from pygame_core.input_manager import InputManager
+from pygame_core.scene_manager import SceneManager
 
 class Game:
     """

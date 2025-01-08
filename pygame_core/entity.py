@@ -4,7 +4,7 @@ This module contains the Entity class, which is the base class for all entities 
 
 from pygame import Color, Rect, Surface, draw, Vector2
 
-from core.dataclasses import Size
+from pygame_core.dataclasses import Size
 
 class Entity:
     """

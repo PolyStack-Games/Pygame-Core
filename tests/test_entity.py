@@ -3,8 +3,8 @@ Tests for the Entity class.
 """
 from pygame import Vector2, Color
 
-from core.dataclasses import Size
-from core.entity import Entity
+from pygame_core.dataclasses import Size
+from pygame_core.entity import Entity
 
 def test_entity_initialization():
     """

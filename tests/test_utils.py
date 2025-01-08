@@ -3,7 +3,7 @@ Tests for the utils module.
 """
 
 import pygame
-from core.utils import check_collision
+from pygame_core.utils import check_collision
 
 def test_check_collision():
     """

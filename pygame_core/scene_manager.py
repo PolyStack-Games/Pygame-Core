@@ -2,8 +2,8 @@
 This module contains the SceneManager class.
 """
 
-from core.input_manager import InputManager
-from core.scene import Scene
+from pygame_core.input_manager import InputManager
+from pygame_core.scene import Scene
 
 class SceneManager:
     """

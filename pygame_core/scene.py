@@ -3,8 +3,8 @@ This module contains the Scene class
 """
 
 from pygame import Surface
-from core.game_context import GameContext
-from core.input_manager import InputManager
+from pygame_core.game_context import GameContext
+from pygame_core.input_manager import InputManager
 
 
 class Scene:
