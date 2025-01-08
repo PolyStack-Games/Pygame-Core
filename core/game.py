@@ -9,7 +9,7 @@ import pygame
 from pygame import time, display
 from pygame.constants import K_ESCAPE
 # pylint: enable=no-name-in-module
-
+# pylint: disable=cyclic-import
 from core.input_manager import InputManager
 from core.scene_manager import SceneManager
 
@@ -60,3 +60,4 @@ class Game:
         # for e in event.get():
         #     if e.type == QUIT or (e.type == KEYDOWN and e.key == K_ESCAPE):
         #         self.running = False
+# pylint: enable=cyclic-import

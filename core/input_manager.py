@@ -8,6 +8,7 @@ from pygame import KEYUP, KEYDOWN, MOUSEBUTTONUP, MOUSEBUTTONDOWN
 from pygame.key import ScancodeWrapper
 # pylint: enable=no-name-in-module
 
+# pylint: disable=too-many-instance-attributes
 class InputManager:
     """
     Handles input from the user, including key states and mouse interactions.
@@ -115,3 +116,4 @@ class InputManager:
             self.mouse_clicked_down[button]
             and rect.collidepoint(self.mouse_pos)
         )
+# pylint: enable=too-many-instance-attributes
