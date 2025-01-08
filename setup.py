@@ -1,15 +1,14 @@
 """Based on: https://github.com/pypa/sampleproject."""
-#pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
-from os import path
+# pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
+from os import path, getenv
 from setuptools import find_packages, setup
 
 # Get the long description from the README file
 with open(path.join(path.abspath(path.dirname(__file__)), 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-# Get the version from the VERSION.py file
-with open(path.join(path.abspath(path.dirname(__file__)), 'VERSION'), encoding='utf-8') as f:
-    version = f.read()
+# Get the version from the environment variable, default to '0.0.1' if not set
+version = getenv('RELEASE_VERSION', '0.0.1')
 
 # Define requirements
 INSTALL_REQUIRE = ['pygame>=2.5.2']
@@ -25,9 +24,9 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
 
-    url="https://github.com/Nicklas185105/Pygame-Core",
+    url="https://github.com/PolyStack-Games/Pygame-Core",
 
-    author="Nicklas Beyer Lydersen",
+    author="PolyStack Games",
     author_email="nicklasbeyerlydersen@gmail.com",
 
     license='MIT',
@@ -46,10 +45,6 @@ setup(
 
     install_requires=INSTALL_REQUIRE,
 
-    # List additional groups of dependencies here (e.g. development
-    # dependencies). You can install these using the following syntax,
-    # for example:
-    # $ pip install -e .[dev,test]
     extras_require={
         'test': TESTS_REQUIRE,
     },
@@ -58,22 +53,14 @@ setup(
 
     tests_require=TESTS_REQUIRE,
 
-    # If there are data files included in your packages that need to be
-    # installed, specify them here.
-    # for example: 'sample': ['package_data.dat']
     package_data={
         # Include any package-specific data files here
     },
 
-    # Although 'package_data' is the preferred approach, in some case you may
-    # need to place data files outside of your packages. See:
-    # http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files # noqa
-    # In this case, 'data_file' will be installed into '<sys.prefix>/my_data'
     data_files=[],
 
     project_urls={
-        'Wiki': 'https://github.com/Nicklas185105/Pygame-Core/wiki',
-        'Source': 'https://github.com/Nicklas185105/Pygame-Core',
+        'Source': 'https://github.com/PolyStack-Games/Pygame-Core',
     },
 )
-#pylint: enable=invalid-name,missing-module-docstring,missing-function-docstring
+# pylint: enable=invalid-name,missing-module-docstring,missing-function-docstring
