@@ -6,20 +6,22 @@ import pygame
 
 from core import create_game_context
 from core.scene import Scene
-from core.scene_manager import SceneManager
 
 class MockScene(Scene):
     """
     A mock scene that does nothing.
     """
+    def __init__(self, screen, game_context):
+        super().__init__(screen, game_context)
+        self.running = True
+
     def update(self, input_manager):
         """Test that the Scene class initializes."""
         self.running = False  # Stop the scene
-        return None  # No transitions
+        _ = input_manager  # Avoid unused variable warning
 
     def render(self):
         """Test that the Scene class initializes"""
-        pass  # Do nothing
 
 def test_scene_manager_initialization():
     """

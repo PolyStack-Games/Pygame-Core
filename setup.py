@@ -1,5 +1,5 @@
 """Based on: https://github.com/pypa/sampleproject."""
-
+#pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
 from os import path
 from setuptools import find_packages, setup
 
@@ -76,3 +76,4 @@ setup(
         'Source': 'https://github.com/Nicklas185105/Pygame-Core',
     },
 )
+#pylint: enable=invalid-name,missing-module-docstring,missing-function-docstring
