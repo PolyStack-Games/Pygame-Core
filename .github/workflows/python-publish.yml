@@ -45,9 +45,9 @@ jobs:
     needs:
       - release-build
 
-    permissions:
+    #permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
-      id-token: write
+      #id-token: write
 
     # Dedicated environments with protections for publishing are strongly recommended.
     # environment: pypi
@@ -64,5 +64,5 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          username: ${{ secrets.PYPI_USERNAME }}
+          username: __token__
           password: ${{ secrets.PYPI_PASSWORD }}
