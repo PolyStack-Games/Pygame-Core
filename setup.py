@@ -1,6 +1,6 @@
 """Based on: https://github.com/pypa/sampleproject."""
 # pylint: disable=invalid-name,missing-module-docstring,missing-function-docstring
-from os import path, getenv
+from os import getenv, path
 from setuptools import find_packages, setup
 
 # Get the long description from the README file
@@ -12,7 +12,9 @@ version = getenv('RELEASE_VERSION', '0.0.1')
 
 # Define requirements
 INSTALL_REQUIRE = ['pygame>=2.5.2']
-TESTS_REQUIRE = ['pylint', 'pytest', 'pytest-pylint']
+EXTRAS_REQUIRE = {
+    'test': ['pylint', 'pytest', 'pytest-pylint'],
+}
 
 setup(
     name='pygame-pygame_core',
@@ -45,13 +47,9 @@ setup(
 
     install_requires=INSTALL_REQUIRE,
 
-    extras_require={
-        'test': TESTS_REQUIRE,
-    },
+    extras_require=EXTRAS_REQUIRE,
 
     setup_requires=['pytest-runner'],
-
-    tests_require=TESTS_REQUIRE,
 
     package_data={
         # Include any package-specific data files here

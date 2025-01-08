@@ -27,12 +27,12 @@ jobs:
 
       - name: Build the package with release version
         run: |
-          release_version="${{ github.event.release.tag_name }}"
+          export RELEASE_VERSION=release_version="${{ github.event.release.tag_name }}"
           if [[ ! $release_version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Invalid release tag format. Expected 'X.Y.Z'."
             exit 1
           fi
-          python setup.py sdist bdist_wheel --version=$release_version
+          python setup.py sdist bdist_wheel
 
       - name: Publish to PyPI
         env:
