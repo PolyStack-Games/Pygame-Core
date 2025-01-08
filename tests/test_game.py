@@ -3,7 +3,11 @@ Tests for the Game class.
 """
 
 import pygame
+
+from core import create_game_context
 from core.game import Game
+from tests.test_scene import MockScene
+
 
 def test_game_initialization():
     """
@@ -21,11 +25,11 @@ def test_game_quits():
     """
     screen = pygame.Surface((800, 600))
     game = Game(screen)
-
+    game_context = create_game_context()
+    game_context.scene_manager.set_initial_scene(MockScene(screen, game_context))
     # Simulate quitting
     # pylint: disable=no-member
-    pygame.event.post(pygame.event.Event(pygame.QUIT))
+    game_context.scene_manager.update(game.input_manager)
     # pylint: enable=no-member
-    game.handle_global_events()
 
-    assert not game.running
+    assert not game_context.scene_manager.current_scene.running
